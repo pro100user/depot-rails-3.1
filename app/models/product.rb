@@ -7,4 +7,5 @@ class Product < ActiveRecord::Base
         with: %r{\.(gif|jpg|jpeg|png)$}i,
         message: 'URL должен указывать на изображение формата GIF, JPEG или PNG.'
     }
+    validates :title, :length => { :minimum => 10 }
 end
