@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Depot::Application.routes.draw do
   resources :products
 
