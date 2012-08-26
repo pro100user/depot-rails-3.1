@@ -53,4 +53,14 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+
+  test "should be three admin links" do
+    get :index
+    assert_select 'td.list_actions' do |elements|
+      elements.each do |element|
+        assert_select element, "a", 3
+      end
+    end
+  end
+
 end
