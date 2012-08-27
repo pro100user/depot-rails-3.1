@@ -4,6 +4,10 @@
 
 <h1>Ваш каталог "Pragmatic"</h1>
 
+<% if @counter >= 5 %>
+<p class="counter">Page was showed <%= pluralize(@counter, "time") %></p>
+<% end %>
+
 <% @products.each do |product| %>
     <div class="entry">
         <%= image_tag(product.image_url) %>
@@ -15,6 +19,7 @@
             :separator => ",",
             :delimiter => " ",
             :format => "%n%u") %></span>
+            <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
         </div>
     </div>
 <% end %>

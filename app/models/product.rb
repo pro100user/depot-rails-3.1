@@ -9,4 +9,19 @@ class Product < ActiveRecord::Base
     }
     # validates :title, :length => { :minimum => 10 }
     validates_length_of :title, :minimum => 10, :too_short => "Должно быть минимум %{count} символов"
+
+    has_many :line_items
+    before_destroy :ensure_not_referenced_by_any_line_item
+
+    private
+
+    # Убеждаемся в отсутствии товарных позиций, ссылающихся на данный товар.
+    def ensure_not_referenced_by_any_line_item
+        if line_items.empty?
+            return true
+        else
+            errors.add(:base, 'существуют товарные позиции')
+            return false
+        end
+    end
 end
